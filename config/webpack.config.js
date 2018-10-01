@@ -1,31 +1,18 @@
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const server = require('./server.config');
 
 const args = require('minimist')(process.argv.slice(2));
 
-const smp = new SpeedMeasurePlugin();
 const ROOT = `${__dirname}/..`;
-const PORT = '8080';
+const PORT = '9002';
 const ENV = process.env.API;
 process.env.API = process.env.API || 'dev';
 
 const isProd = args.mode === 'production';
 const buildServer = args['test-build'];
 
-const appFiles = ['./index.jsx'];
+const appFiles = ['./index.js'];
 const appName = isProd ? '[name].[chunkhash].js' : '[name].js';
-let vendorFiles = ['react'];
-
-if (!isProd) {
-	vendorFiles = [...vendorFiles,
-		'webpack-dev-server/client?http://0.0.0.0:' + PORT
-	];
-
-	if (ENV !== 'vm') {
-		vendorFiles = [...vendorFiles, 'react-hot-loader/patch', 'webpack/hot/only-dev-server']
-	}
-}
 
 if (!isProd) {
 	process.traceDeprecation = true;
@@ -33,9 +20,8 @@ if (!isProd) {
 
 const config = {
 	mode: isProd ? 'production' : 'development',
-	context: `${ROOT}/app`,
+	context: `${ROOT}/src`,
 	entry: {
-		vendor: vendorFiles,
 		app: appFiles
 	},
 	output: {
@@ -45,17 +31,6 @@ const config = {
 	},
 	optimization: {
 		// https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
-		splitChunks: {
-			cacheGroups: {
-				vendor: {
-					name: "vendor",
-					test: /[\\/]node_modules[\\/]/,
-					// enforce: true
-					chunks: 'all',
-					minChunks: 1
-				}
-			}
-		},
 		minimize: false, //isProd,
 		minimizer: [
 			new UglifyJSPlugin({
@@ -88,4 +63,4 @@ const config = {
 	devServer: server(ROOT)
 };
 
-module.exports = smp.wrap(config);
+module.exports = config;

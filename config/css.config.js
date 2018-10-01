@@ -1,15 +1,15 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let css;
 
 function createCss (isProd) {
 
 	if (!css) {
-		const plugins = {
-			main: new MiniCssExtractPlugin({
-				filename: isProd ? 'style.[chunkhash].css' : 'style.css'
-			})
-		};
+		// const plugins = {
+		// 	main: new MiniCssExtractPlugin({
+		// 		filename: isProd ? 'style.[chunkhash].css' : 'style.css'
+		// 	})
+		// };
 
 		const rules = {
 			main: {
@@ -19,16 +19,12 @@ function createCss (isProd) {
 					{
 						loader: 'css-loader',
 						options: { sourceMap: true }
-					},
-					{
-						loader: 'sass-loader',
-						options: { sourceMap: true }
 					}
 				]
 			}
 		};
 		css = {
-			plugins,
+			// plugins,
 			rules
 		};
 	}

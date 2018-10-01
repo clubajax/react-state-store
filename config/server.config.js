@@ -11,7 +11,7 @@ module.exports = function server (ROOT) {
 		// messages for errors or HMR (quite verbose)
 		// Possible values are none, error, warning or info (default).
 		clientLogLevel: 'none',
-
+		port: 9002,
 		host: '0.0.0.0',
 		contentBase: `${ROOT}dist`,
 		historyApiFallback: true,

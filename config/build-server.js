@@ -5,7 +5,7 @@ const request = require('request');
 // this file used for testing builds on localhost
 
 const BASE_URL = 'https://smartar-dev.researchnow.com';
-const PORT = 8081;
+const PORT = 9002;
 const defaultHeaders = {
 	connection: 'keep-alive',
 	Connection: 'keep-alive',

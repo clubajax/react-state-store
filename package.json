@@ -11,6 +11,7 @@
 	},
 	"homepage": "https://github.com/clubajax/react-state-store#readme",
 	"scripts": {
+		"start": "webpack-dev-server --config ./config/webpack.config.js --mode development",
 		"test": "NODE_ENV=test mocha test/**/*.test.js",
 		"mocha": "mocha test/setupTests.js --reporter spec --require babel-core/register 'test/**/*.test.js'"
 	},
@@ -31,6 +32,7 @@
 	"devDependencies": {
 		"@babel/cli": "7.1.0",
 		"@babel/core": "7.1.0",
+		"@babel/plugin-syntax-dynamic-import": "^7.0.0",
 		"@babel/plugin-transform-classes": "7.0.0-beta.35",
 		"@babel/plugin-transform-modules-commonjs": "^7.1.0",
 		"@babel/preset-env": "7.1.0",

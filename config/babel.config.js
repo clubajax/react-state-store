@@ -19,12 +19,12 @@ module.exports = (isProd, ROOT) => {
 		debug: true,
 		// false prevents babel from transforming import/exports
 		// but false also breaks ui-shared
-		modules: true,
+		// modules: true,
 
 		// adds polyfills:
 		//useBuiltIns: 'usage',
 
-		// targets: { browsers }
+		targets: { browsers }
 	};
 
 	const prodPlugs = [
