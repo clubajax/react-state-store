@@ -13,18 +13,17 @@ describe('A suite', function() {
 		const wrapper = shallow(<Foo />);
 		expect(wrapper).to.contain(<div className="foo">Bar</div>);
 
-		//expect(shallow(<Foo />).to.contain(<div className="foo">Bar</div>));
 	});
 
-	// it('should be selectable by class "foo"', function() {
-	// 	expect(shallow(<Foo />).is('.foo')).toBe(true);
-	// });
-	//
-	// it('should mount in a full DOM', function() {
-	// 	expect(mount(<Foo />).find('.foo').length).toBe(1);
-	// });
-	//
-	// it('should render to static HTML', function() {
-	// 	expect(render(<Foo />).text()).toEqual('Bar');
-	// });
+	it('should be selectable by class "foo"', function() {
+		expect(shallow(<Foo />).is('.foo')).to.equal(true);
+	});
+
+	it('should mount in a full DOM', function() {
+		expect(mount(<Foo />).find('.foo').length).to.equal(1);
+	});
+
+	it('should render to static HTML', function() {
+		expect(render(<Foo />).text()).to.equal('Bar');
+	});
 });
