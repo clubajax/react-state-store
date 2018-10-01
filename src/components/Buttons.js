@@ -6,7 +6,7 @@ export default class Container extends React.Component {
 	render () {
 		return (
 			<div className="buttons">
-				<button onClick={() => {
+				<button className="uno" onClick={() => {
 					store.set(store.get().one ? { one: false } : { one: true });
 				}}>Uno</button>
 				<button onClick={() => {

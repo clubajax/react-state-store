@@ -12,7 +12,7 @@ export default class List extends React.Component {
 
 	render () {
 		return (
-			<div>
+			<div className="list">
 				<h4>list</h4>
 				<div>
 					{this.state.one && <DisplayOne />}

@@ -13,7 +13,7 @@
 	"scripts": {
 		"start": "webpack-dev-server --config ./config/webpack.config.js --mode development",
 		"test": "NODE_ENV=test mocha test/**/*.test.js",
-		"mocha": "mocha test/setupTests.js --reporter spec --require babel-core/register 'test/**/*.test.js'"
+		"mocha": "mocha test/setupTests.js --reporter spec --require babel-core/register --watch 'test/**/*.test.js'"
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
