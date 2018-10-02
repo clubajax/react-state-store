@@ -1,24 +1,21 @@
 import React from 'react';
 import DisplayOne from './DisplayOne';
 import DisplayTwo from './DisplayTwo';
-import store from '../store';
+import connect from '../connect';
 
-export default class List extends React.Component {
-
-	constructor () {
-		super();
-		store.subscribe(this, 'one,two');
-	}
+class List extends React.Component {
 
 	render () {
 		return (
 			<div className="list">
 				<h4>list</h4>
 				<div>
-					{this.state.one && <DisplayOne />}
-					{this.state.two && <DisplayTwo />}
+					{this.props.one && <DisplayOne />}
+					{this.props.two && <DisplayTwo />}
 				</div>
 			</div>
 		);
 	}
 }
+
+export default connect('one,two', List);
