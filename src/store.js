@@ -1,4 +1,7 @@
 
+// `isMounted` has been deprecated for years. Chances are it will not be removed
+// if it is, one possibility is to overwrite componentDidMount & componentWillUnmount
+//
 export default {
 
 	set (namespace, value) {
@@ -25,6 +28,9 @@ export default {
 
 	removeInstances (indicies) {
 		console.log('remove unmounted instances', indicies);
+		indicies.reverse().forEach((index) => {
+			this.unsubscribe(items[index]);
+		});
 	},
 
 	get () {
@@ -32,8 +38,27 @@ export default {
 	},
 
 	subscribe (instance, namespaces) {
-		items.push({ instance, namespaces: namespaces.split(',').map(str => str.trim()) });
+		const unmount = instance.componentWillUnmount;
+		const mount = instance.componentDidMount;
+		items.push({
+			instance,
+			namespaces: namespaces.split(',').map(str => str.trim()),
+			restore () {
+				instance.componentWillUnmount = unmount;
+				instance.componentDidMount = mount;
+			}
+		});
 		setState(items[items.length - 1], { isInit: true });
+	},
+
+	unsubscribe (instance) {
+		const index = items.findIndex(item => item.instance === instance);
+		if (index === -1) {
+			console.log('instance NO FOUND');
+			return;
+		}
+		items[index].restore();
+		items.splice(index, 1);
 	},
 
 	flush () {
