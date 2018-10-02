@@ -1,16 +1,9 @@
 import FauxComponent from './FauxComponent';
 import store from '../src/store';
-import { shallow } from 'enzyme/build/index';
 
-
-describe.only('Class', () => {
-	let removeInstances;
-	beforeEach(() => {
-		removeInstances = store.removeInstances;
-	});
+describe('Class', () => {
 	afterEach(() => {
 		store.flush();
-		store.removeInstances = removeInstances;
 	});
 
 	it('renders without crashing', () => {
@@ -21,6 +14,7 @@ describe.only('Class', () => {
 	it('sets state via object', () => {
 		const one = new FauxComponent({ subscribe: 'one' });
 		store.set({ one: 1 });
+		one.mount();
 		expect(one.getState()).to.equal('{"one":1}');
 	});
 
@@ -44,6 +38,7 @@ describe.only('Class', () => {
 				stateCalled++;
 			}
 		});
+		one.mount();
 
 		store.set('name', 'mike');
 		store.set('name', 'mike');
@@ -62,18 +57,14 @@ describe.only('Class', () => {
 		expect(stateCalled).to.equal(2);
 	});
 
-	it.only('will not set state until mounted', () => {
-		let removeCalled = 0;
-		store.removeInstances = () => {
-			removeCalled++;
-		};
-
+	it('will not set state if unmounted', () => {
 		const node = new FauxComponent({ mounted: false, subscribe: 'name' });
 		expect(node.getState()).to.equal('{}');
 		store.set('name', 'mike');
-		expect(node.getState()).to.equal('{}');
-		expect(removeCalled).to.equal(0);
-		console.log('state', node.getState());
+		expect(node.getState()).to.equal('{"name":"mike"}');
+		node.unmount();
+		store.set('name', 'madhu');
+		expect(node.getState()).to.equal('{"name":"mike"}');
 	});
 
 });

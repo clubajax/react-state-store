@@ -1,13 +1,9 @@
 import store from '../src/store';
+import { CREATED, MOUNTED, STATE, UNMOUNTED } from '../src/constants';
 
 export default class FauxComponent {
 	constructor (options) {
-		this.updater = {
-			mounted: options.mounted !== undefined ? options.mounted : true,
-			isMounted () {
-				return this.mounted;
-			}
-		};
+		this[STATE] = CREATED;
 
 		Object.assign(this, options);
 
@@ -35,10 +31,10 @@ export default class FauxComponent {
 	}
 
 	unmount () {
-		this.updater.mounted = false;
+		this[STATE] = UNMOUNTED;
 	}
 
 	mount () {
-		this.updater.mounted = true;
+		this[STATE] = MOUNTED;
 	}
 }

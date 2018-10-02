@@ -6,7 +6,7 @@ import DisplayTwo from '../src/components/DisplayTwo';
 import List from '../src/components/List';
 import store from '../src/store';
 
-describe('React', () => {
+describe.only('React', () => {
 
 	it('renders without crashing', () => {
 		const wrapper = shallow(<Container />);

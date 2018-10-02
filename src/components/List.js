@@ -4,7 +4,6 @@ import DisplayTwo from './DisplayTwo';
 import connect from '../connect';
 
 class List extends React.Component {
-
 	render () {
 		return (
 			<div className="list">

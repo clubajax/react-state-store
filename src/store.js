@@ -3,7 +3,6 @@ import { STATE, CREATED, MOUNTED, UNMOUNTED } from './constants';
 export default {
 
 	set (namespace, value) {
-
 		if (typeof namespace === 'object') {
 			Object.assign(state, namespace);
 		} else {
@@ -51,7 +50,9 @@ function setState (item, options = {}) {
 
 	const namespace = options.namespace;
 
+
 	if (item.instance.state && noChanges(item, namespace)) {
+		console.log('NO CHANGE');
 		return;
 	}
 
