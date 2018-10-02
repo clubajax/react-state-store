@@ -19,11 +19,15 @@ export default class FauxComponent {
 			}
 		});
 
+		this.setStateCallback = options.setStateCallback;
 
 	}
 
 	setState (state) {
 		this.state = Object.assign(this.state || {}, state);
+		if (this.setStateCallback) {
+			this.setStateCallback();
+		}
 	}
 
 	getState () {
