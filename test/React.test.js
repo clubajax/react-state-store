@@ -50,5 +50,4 @@ describe('React', () => {
 		wrapper.unmount();
 		store.flush();
 	});
-
 });

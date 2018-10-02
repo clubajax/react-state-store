@@ -7,19 +7,21 @@ export default class Container extends React.Component {
 		return (
 			<div className="buttons">
 				<button className="uno" onClick={() => {
-					store.set(store.get().one ? { one: false } : { one: true });
-				}}>Uno</button>
+					store.set('one', !store.get().one);
+				}}>Uno
+				</button>
 				<button onClick={() => {
-					store.set(store.get().two ? { two: false } : { two: true });
-				}}>Dos</button>
+					store.set('two', !store.get().two);
+				}}>Dos
+				</button>
 
 				<input onChange={(e) => {
-					store.set({ onename: e.target.value });
-				}}/>
+					store.set('one.name', e.target.value);
+				}} />
 
 				<input onChange={(e) => {
-					store.set({ twoname: e.target.value });
-				}}/>
+					store.set('two.name', e.target.value);
+				}} />
 
 			</div>
 		);

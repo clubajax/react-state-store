@@ -3,8 +3,9 @@ import store from '../src/store';
 export default class FauxComponent {
 	constructor (options) {
 		this.updater = {
+			mounted: options.mounted !== undefined ? options.mounted : true,
 			isMounted () {
-				return true;
+				return this.mounted;
 			}
 		};
 
@@ -22,10 +23,18 @@ export default class FauxComponent {
 	}
 
 	setState (state) {
-		this.state = Object.assign(this.state || {}, state)
+		this.state = Object.assign(this.state || {}, state);
 	}
 
 	getState () {
 		return JSON.stringify(this.state);
+	}
+
+	unmount () {
+		this.updater.mounted = false;
+	}
+
+	mount () {
+		this.updater.mounted = true;
 	}
 }

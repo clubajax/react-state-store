@@ -60,5 +60,8 @@
 		"webpack": "^4.20.2",
 		"webpack-cli": "3.1.1",
 		"webpack-dev-server": "^3.1.9"
+	},
+	"dependencies": {
+		"@clubajax/no-dash": "^0.6.1"
 	}
 }

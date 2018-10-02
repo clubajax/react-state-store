@@ -5,12 +5,12 @@ export default class DisplayTwo extends React.Component {
 
 	constructor () {
 		super();
-		store.subscribe(this, 'twoname');
+		store.subscribe(this, 'two.name');
 	}
 
 	render () {
 		return (
-			<div>Display Two {this.state.twoname}</div>
+			<div>Display Two {this.state.name}</div>
 		);
 	}
 }

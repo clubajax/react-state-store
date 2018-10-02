@@ -1,14 +1,22 @@
+
 let state = {};
 const items = [];
 
-function setState (item, { id, isInit }) {
-	if (id && item.instance.id !== id) {
+function setState (item, options = {}) {
+
+	const isInit = options.isInit;
+	const namespace = options.namespace;
+
+	if (item.instance.state && item.instance.state[key(namespace)] === state[namespace]) {
+		console.log('NOCHANGE', key(namespace));
 		return;
 	}
+
 	const obj = {};
-	item.props.forEach((prop) => {
-		obj[prop] = state[prop];
+	item.namespaces.forEach((namespace) => {
+		obj[key(namespace)] = state[namespace];
 	});
+
 	if (isInit) {
 		if (item.instance.state) {
 			Object.assign(item.instance.state, obj);
@@ -26,39 +34,61 @@ function setState (item, { id, isInit }) {
 }
 
 export default {
-	set (obj, id) {
-		console.log('items', obj, items.length);
-		Object.assign(state, obj);
+
+	set (namespace, value) {
+		console.log('set', namespace);
+
+		state[namespace] = value;
+
 		const remove = [];
 		items.forEach((item, i) => {
-			if (setState(item, { id })) {
-				remove.push(i);
+			if (item.namespaces.includes(namespace)) {
+				if (setState(item, { namespace })) {
+					remove.push(i);
+				}
 			}
 		});
 
-		// remove unmounted instances
+		if (remove.length) {
+			console.log('TODO: remove unmounted instances');
+		}
 	},
+
 	get () {
 		return state;
 	},
-	subscribe (instance, props) {
-		items.push({ instance, props: props.split(',').map(str => str.trim()) });
 
-		setState(items[items.length-1], { isInit: true });
+	subscribe (instance, namespaces) {
+		items.push({ instance, namespaces: namespaces.split(',').map(str => str.trim()) });
+		console.log('item', items[items.length - 1]);
+		setState(items[items.length - 1], { isInit: true });
 	},
+
 	flush () {
 		items.length = 0;
 		state = {};
 	}
 };
 
+function key (namespace) {
+	const parts = namespace.split('.');
+	return parts[parts.length - 1];
+}
+
 // √ react-state-store
+
 // new Store() - ?
-// channels? Don't keep state?
+// 		no - makes it less simple
+
+// Don't keep state?
 // -> state is still a good idea, if it is set before init
 //		this prevents race conditions
+
+// namespaces?
 //		'foo.bar.name' <- sets state.name [foo.bar] <- channel name
-// √ instances? need chart example?
+
+// √ instances?
+// FIXME! Overwrites "name"
 // still want to setState under the hood
 // store.on(this, '
 // foo.name,
@@ -67,6 +97,6 @@ export default {
 // ->
 // store.set(state, this.id);
 //
-// is there an issue with state vs prop, namely an interception?
+// is there an issue with state vs namespace, namely an interception?
 // intercept:
 // store.on('foo.bar', (state) => { return change-of-state });

@@ -694,6 +694,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@clubajax/no-dash@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@clubajax/no-dash/-/no-dash-0.6.1.tgz#da41c723d0a664343203dee6e22571f2b3bd749a"
+
 "@types/node@*":
   version "10.11.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.3.tgz#c055536ac8a5e871701aa01914be5731539d01ee"

@@ -5,7 +5,7 @@ export default class DisplayOne extends React.Component {
 
 	constructor () {
 		super();
-		store.subscribe(this, 'onename');
+		store.subscribe(this, 'one.name');
 	}
 
 	// componentDidMount () {
@@ -23,7 +23,7 @@ export default class DisplayOne extends React.Component {
 
 	render () {
 		return (
-			<div>Display One {this.state.onename}</div>
+			<div>Display One {this.state.name}</div>
 		);
 	}
 }
