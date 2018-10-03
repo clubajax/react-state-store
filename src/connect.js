@@ -27,9 +27,7 @@ export default function connect (namespaces, Component) {
 		}
 
 		render () {
-			return (
-				<Component {...this.state} {...this.props} />
-			)
+			return React.createElement(Component, {...this.state, ...this.props});
 		}
 	}
 	return StateHOC;
