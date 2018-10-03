@@ -81,13 +81,6 @@ describe('Class', () => {
 		// appends to static Class namespaces
 		// if props.instanceNamespaces
 
-		// possible different delimiter:
-		// refer to GraphQL
-		// connect('one::key,two::key', List);
-
-		// need a way to track the state, like redux
-		// window.reactStateStore.log()
-
 		// store.save to localStorage
 
 		// case types.ARCHIVE_PROJECT:

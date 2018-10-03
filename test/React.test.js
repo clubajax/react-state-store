@@ -4,6 +4,7 @@ import Container from '../src/components/Container';
 import DisplayOne from '../src/components/DisplayOne';
 import DisplayTwo from '../src/components/DisplayTwo';
 import List from '../src/components/List';
+import InstanceTest from '../src/components/InstanceTest';
 import store from '../src/store';
 
 describe('React', () => {
@@ -42,14 +43,34 @@ describe('React', () => {
 		const i1 = wrapper.find('input').at(0);
 		const i2 = wrapper.find('input').at(1);
 
-
-		// FIXME: why did this break?
-
-
 		i1.simulate('change', {target:{value: 'abc'}});
 		b1.simulate('click');
 
 		expect(wrapper.find(List).find('div').at(1).text()).to.equal('Display One abc');
+
+		wrapper.unmount();
+		store.flush();
+	});
+
+	it('will set state React component instances', () => {
+		const wrapper = mount(<Container />);
+		const list = wrapper.find(List).instance();
+
+		const node1 = wrapper.find(InstanceTest).at(0);
+		const node2 = wrapper.find(InstanceTest).at(1);
+		const node3 = wrapper.find(InstanceTest).at(2);
+
+		const btn = wrapper.find('button.for-instance');
+
+		expect(node1.text()).to.equal('Instance Test ');
+		expect(node2.text()).to.equal('Instance Test ');
+		expect(node3.text()).to.equal('Instance Test ');
+
+		btn.simulate('click');
+
+		expect(node1.text()).to.equal('Instance Test NAME-A');
+		expect(node2.text()).to.equal('Instance Test NAME-B');
+		expect(node3.text()).to.equal('Instance Test NAME-C');
 
 		wrapper.unmount();
 		store.flush();

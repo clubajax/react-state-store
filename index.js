@@ -1,2 +1,2 @@
-import store from './src/store';
-import connect from './src/connect';
+export {default as connect} from './src/connect';
+export {default as store} from './src/store';

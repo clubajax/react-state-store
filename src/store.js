@@ -22,6 +22,7 @@ const store = {
 	},
 
 	subscribe (namespaces, instance) {
+		// console.log('subscribe', namespaces);
 		items.push({
 			instance,
 			namespaces: namespaces.split(',').map(str => str.trim())
@@ -193,5 +194,9 @@ function getType (item) {
 	}
 	return typeof item;
 }
+
+global.logReactStateStore = () => {
+	console.log(store.get());
+};
 
 export default store;

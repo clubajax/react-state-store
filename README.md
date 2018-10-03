@@ -87,6 +87,10 @@ store.set({
 });
 ```
 
+### Instance Subscriptions
+
+
+
 ### Methods
 
 #### `set(key, value)`

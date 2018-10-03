@@ -16,7 +16,6 @@ export default class Container extends React.Component {
 				</button>
 
 				<input onChange={(e) => {
-					console.log('CHANGE:::', e.target.value);
 					store.set('one.name', e.target.value);
 				}} />
 

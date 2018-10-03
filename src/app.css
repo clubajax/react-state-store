@@ -22,5 +22,7 @@ input{
 	padding: 10px;
 	margin-right: 5px;
 	font-size: inherit;
-
+}
+.instance-test{
+	margin-top: 10px;
 }
