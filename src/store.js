@@ -1,4 +1,4 @@
-import { STATE, CREATED, MOUNTED, UNMOUNTED } from './constants';
+import { STATE, CREATED, MOUNTED } from './constants';
 
 export default {
 
@@ -16,8 +16,9 @@ export default {
 		});
 	},
 
-	get () {
-		return state;
+	get (name) {
+		// TODO: ensure returned objects are copied
+		return name ? state[name] : state;
 	},
 
 	subscribe (instance, namespaces) {
@@ -50,9 +51,7 @@ function setState (item, options = {}) {
 
 	const namespace = options.namespace;
 
-
 	if (item.instance.state && noChanges(item, namespace)) {
-		console.log('NO CHANGE');
 		return;
 	}
 

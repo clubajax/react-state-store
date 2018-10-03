@@ -4,9 +4,11 @@ import { STATE, CREATED, MOUNTED, UNMOUNTED } from './constants';
 
 export default function connect (namespaces, Component) {
 	class StateHOC extends React.Component {
-		constructor () {
+		constructor (props) {
 			super();
 			this[STATE] = CREATED;
+
+			// if props.instanceNamespaces
 			store.subscribe(this, namespaces);
 		}
 
@@ -22,7 +24,7 @@ export default function connect (namespaces, Component) {
 		render () {
 			// console.log('hoc.render', this.state);
 			return (
-				<Component {...this.state} />
+				<Component {...this.state} {...this.props} />
 			)
 		}
 	}

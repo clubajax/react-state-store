@@ -67,4 +67,42 @@ describe('Class', () => {
 		expect(node.getState()).to.equal('{"name":"mike"}');
 	});
 
+	it.skip('should do these things in the future', () => {
+		store.set({
+			'one.name': 'madhu',
+			'two.name': 'madhu'
+		});
+
+		store.on('two.name', (data) => {
+			data += changes;
+			return data;
+		});
+
+		// appends to static Class namespaces
+		// if props.instanceNamespaces
+
+		// possible different delimiter:
+		// refer to GraphQL
+		// connect('one::key,two::key', List);
+
+		// need a way to track the state, like redux
+		// window.reactStateStore.log()
+
+		// test for setting objects
+		// store.set('one.project.name', {foo:true, bar:false});
+
+		// store.save to localStorage
+
+		// subscribe to handle functions or non-React instances
+		// - and return a remove() function
+
+		// store.get(NAME)
+		// - if returning an object, copy it (use funcs from nodash)
+
+		// case types.ARCHIVE_PROJECT:
+		// case types.RESTORE_PROJECT:
+
+
+	})
+
 });

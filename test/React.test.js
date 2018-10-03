@@ -6,7 +6,7 @@ import DisplayTwo from '../src/components/DisplayTwo';
 import List from '../src/components/List';
 import store from '../src/store';
 
-describe.only('React', () => {
+describe('React', () => {
 
 	it('renders without crashing', () => {
 		const wrapper = shallow(<Container />);
@@ -41,6 +41,10 @@ describe.only('React', () => {
 		const b2 = wrapper.find('button').at(1);
 		const i1 = wrapper.find('input').at(0);
 		const i2 = wrapper.find('input').at(1);
+
+
+		// FIXME: why did this break?
+
 
 		i1.simulate('change', {target:{value: 'abc'}});
 		b1.simulate('click');

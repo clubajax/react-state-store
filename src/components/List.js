@@ -2,6 +2,7 @@ import React from 'react';
 import DisplayOne from './DisplayOne';
 import DisplayTwo from './DisplayTwo';
 import connect from '../connect';
+import store from '../store';
 
 class List extends React.Component {
 	render () {
