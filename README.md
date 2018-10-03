@@ -107,7 +107,7 @@ store.set('toggle', !store.get('toggle'));
 
 #### `subscribe(instance, subscriptions)`
 
-Typically used internally via `connect`, but could be used as standalone. 
+Typically used internally via `connect`, but could be used as standalone with a function. 
 
 `instance` is expected to be a React component or a standard function.
 `subscriptions` is a string, which could be:
