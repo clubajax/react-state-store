@@ -1,9 +1,9 @@
 {
-	"name": "react-state-store",
-	"description": "State management made simple",
+	"name": "@clubajax/react-state-store",
+	"description": "React state management made simple",
 	"author": "clubajax <anm9tr@gmail.com>",
 	"version": "0.2.0",
-	"main": "store.js",
+	"main": "index.js",
 	"license": "MIT",
 	"repository": "git://github.com/clubajax/react-state-store.git",
 	"bugs": {
@@ -12,22 +12,7 @@
 	"homepage": "https://github.com/clubajax/react-state-store#readme",
 	"scripts": {
 		"start": "webpack-dev-server --config ./config/webpack.config.js --mode development",
-		"test": "NODE_ENV=test mocha test/**/*.test.js",
-		"mocha": "mocha test/setupTests.js --reporter spec --require babel-core/register --watch 'test/**/*.test.js'"
-	},
-	"jest": {
-		"setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
-		"setupFiles": [
-			"./src/setupTests.js"
-		],
-		"unmockedModulePathPatterns": [
-			"react",
-			"enzyme",
-			"jest-enzyme"
-		],
-		"transformIgnorePatterns": [
-			"node_modules/(?!(react-native|my-project|redux-persist)/)"
-		]
+		"test": "mocha test/setupTests.js --reporter spec --require babel-core/register --watch 'test/**/*.test.js'"
 	},
 	"devDependencies": {
 		"@babel/cli": "7.1.0",
