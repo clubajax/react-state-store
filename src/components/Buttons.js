@@ -7,11 +7,11 @@ export default class Container extends React.Component {
 		return (
 			<div className="buttons">
 				<button className="uno" onClick={() => {
-					store.set('one', !store.get('one').one);
+					store.set('one', !store.get('one'));
 				}}>Uno
 				</button>
 				<button onClick={() => {
-					store.set('two', !store.get('two').two);
+					store.set('two', !store.get('two'));
 				}}>Dos
 				</button>
 

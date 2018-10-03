@@ -105,7 +105,7 @@ const allState = store.get();
 store.set('toggle', !store.get('toggle'));
 ```
 
-#### `subscribe(instance, subscriptions)`
+#### `subscribe(subscriptions, instance)`
 
 Typically used internally via `connect`, but could be used as standalone with a function. 
 

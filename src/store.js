@@ -21,7 +21,7 @@ export default {
 		return name ? state[name] : state;
 	},
 
-	subscribe (instance, namespaces) {
+	subscribe (namespaces, instance) {
 		items.push({
 			instance,
 			namespaces: namespaces.split(',').map(str => str.trim())

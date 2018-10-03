@@ -9,7 +9,7 @@ export default function connect (namespaces, Component) {
 			this[STATE] = CREATED;
 
 			// if props.instanceNamespaces
-			store.subscribe(this, namespaces);
+			store.subscribe(namespaces, this);
 		}
 
 		componentDidMount () {

@@ -9,7 +9,7 @@ export default class FauxComponent {
 
 		Object.keys(options).forEach((key) => {
 			if (key === 'subscribe') {
-				store.subscribe(this, options[key]);
+				store.subscribe(options[key], this);
 			} else {
 				this[key] = options[key];
 			}
