@@ -1,6 +1,7 @@
 import { STATE, CREATED, MOUNTED } from './constants';
 
-export default {
+const store = {
+	delimiter: '.',
 
 	set (namespace, value) {
 		if (typeof namespace === 'object') {
@@ -106,7 +107,7 @@ function includes (item, ns) {
 }
 
 function key (namespace) {
-	const parts = namespace.split('.');
+	const parts = namespace.split(store.delimiter);
 	return parts[parts.length - 1];
 }
 
@@ -192,3 +193,5 @@ function getType (item) {
 	}
 	return typeof item;
 }
+
+export default store;

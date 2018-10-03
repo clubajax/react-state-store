@@ -88,16 +88,7 @@ describe('Class', () => {
 		// need a way to track the state, like redux
 		// window.reactStateStore.log()
 
-		// test for setting objects
-		// store.set('one.project.name', {foo:true, bar:false});
-
 		// store.save to localStorage
-
-		// subscribe to handle functions or non-React instances
-		// - and return a remove() function
-
-		// store.get(NAME)
-		// - if returning an object, copy it (use funcs from nodash)
 
 		// case types.ARCHIVE_PROJECT:
 		// case types.RESTORE_PROJECT:

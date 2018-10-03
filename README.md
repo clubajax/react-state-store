@@ -125,6 +125,16 @@ Remove the subscription.
 
 Clears the store's state and subscriptions. Primarily used for testing.
 
+### Properties
+
+#### delimiter (string)
+
+RSS defaults to a dot (.) as a delimiter between the namespace and the key. This can be set to
+something else if prefered:
+
+    store.delimiter = '::';
+    store.set('namespace::name', 'my-value');
+
 ## License
 
 [Free](./LICENSE) to use at will.

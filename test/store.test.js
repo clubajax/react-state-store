@@ -3,6 +3,7 @@ import store from '../src/store';
 describe('store', () => {
 	afterEach(() => {
 		store.flush();
+		store.delimiter = '.';
 	});
 
 	it('subscribes to a function', () => {
@@ -62,4 +63,13 @@ describe('store', () => {
 		state.bar = 'nine';
 		expect(JSON.stringify(store.get())).to.equal('{"object":{"a":1,"b":2},"foo":true,"bar":false}');
 	});
+
+	it('should allow a custom delimiter', () => {
+		store.delimiter = '::';
+		store.set('namespace::name', 'store');
+		store.subscribe('namespace::name', (value) => {
+			expect(value.name).to.equal('store');
+		});
+	});
+
 });
