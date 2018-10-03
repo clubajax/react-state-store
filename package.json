@@ -2,7 +2,7 @@
 	"name": "react-state-store",
 	"description": "State management made simple",
 	"author": "clubajax <anm9tr@gmail.com>",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"main": "store.js",
 	"license": "MIT",
 	"repository": "git://github.com/clubajax/react-state-store.git",

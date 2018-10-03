@@ -5,14 +5,19 @@ global state without all of the boilerplate.
 
 ## Installation
 
+	yarn add @clubajax/react-state-store
+
+	npm install @clubajax/react-state-store
+
 ## Description
 
 RSS differs from the [Flux Architecture](http://facebook.github.io/flux/). Flux dispatches to 
-all registered callbacks, while RSS dispatches only to the relevant callbacks.
+all registered callbacks, while RSS dispatches only to the relevant callbacks. RSS is essentially 
+a pub/sub pattern. While this loses a few of the features of Flux, such as deterministic call order,
+it makes up for it in simplicity of setup, and a synchronistic system. RSS is essentially immutable, in that the internal state is not exposed to changes.
 
-It is sync and does not use or expect Promises.
-
-Immutability?
+Unlike Redux, it maintains a single state tree. There is no rewind of state, or undo, but because 
+of this it is faster and uses much less memory.
 
 ## Usage
 
