@@ -31,7 +31,7 @@ class Item extends React.Component {
 	render () {
 		return (
 			<div>
-                {this.props.name && <Display />}
+				{this.props.name && <Display />}
 			</div>
 		);
 	}
@@ -40,15 +40,15 @@ class Item extends React.Component {
 export default connect('name', List);
 ```
 The second argument of `connect` is a React component. The first argument, in this case, is
-the property for which to subscribe. When `name` changes in the store, the Item.props object 
+the key for which to subscribe. When `name` changes in the store, the `Item.props` object 
 will be updated and `render()` will be triggered.
 
 There can be multiple subscriptions, separated by commas.
 
 A subscription has two aspects, before and after the period-delimiter: an optional namespace, 
-and the actual property that will be pushed to the `props` object.
+and the key that will be pushed to the `props` object.
 
-    [namespace].[property]
+    [namespace].[key]
 
 Example:
 
@@ -59,8 +59,8 @@ class List extends React.Component {
 	render () {
 		return (
 			<div>
-                {this.props.one && <DisplayOne />}
-                {this.props.two && <DisplayTwo />}
+				{this.props.one && <DisplayOne />}
+				{this.props.two && <DisplayTwo />}
 			</div>
 		);
 	}
@@ -93,7 +93,7 @@ store.set({
 
 Described above. Sets a state property via the arguments of key/value, or an object of key/value pairs.
 
-#### `get()`
+#### `get(key)`
 
 `get(key)` will return a property from the store. If no key is passed, the entire state will be
 returned. Any objects returned are copies, so that internal state cannot be altered:
@@ -125,4 +125,6 @@ Remove the subscription.
 
 Clears the store's state and subscriptions. Primarily used for testing.
 
+## License
 
+[Free](./LICENSE) to use at will.
