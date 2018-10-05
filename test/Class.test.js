@@ -1,4 +1,4 @@
-import FauxComponent from './FauxComponent';
+import Component from './FauxComponent';
 import store from '../src/store';
 
 describe('Class', () => {
@@ -7,20 +7,20 @@ describe('Class', () => {
 	});
 
 	it('renders without crashing', () => {
-		const one = new FauxComponent({ id: 'one' });
+		const one = new Component({ id: 'one' });
 		expect(one.id).to.equal('one');
 	});
 
 	it('sets state via object', () => {
-		const one = new FauxComponent({ subscribe: 'one' });
+		const one = new Component({ subscribe: 'one' });
 		store.set({ one: 1 });
 		one.mount();
 		expect(one.getState()).to.equal('{"one":1}');
 	});
 
 	it('sets state by namespaces', () => {
-		const one = new FauxComponent({ subscribe: 'one.name' });
-		const two = new FauxComponent({ subscribe: 'two.name' });
+		const one = new Component({ subscribe: 'one.name' });
+		const two = new Component({ subscribe: 'two.name' });
 		store.set('one.name', "One");
 		expect(one.getState()).to.equal('{"name":"One"}');
 		expect(two.getState()).to.equal('{}');
@@ -32,7 +32,7 @@ describe('Class', () => {
 	it('it will not call setState if no change', () => {
 
 		let stateCalled = 0;
-		const one = new FauxComponent({
+		const one = new Component({
 			subscribe: 'name',
 			setStateCallback: () => {
 				stateCalled++;
@@ -58,7 +58,7 @@ describe('Class', () => {
 	});
 
 	it('will not set state if unmounted', () => {
-		const node = new FauxComponent({ mounted: false, subscribe: 'name' });
+		const node = new Component({ mounted: false, subscribe: 'name' });
 		expect(node.getState()).to.equal('{}');
 		store.set('name', 'mike');
 		expect(node.getState()).to.equal('{"name":"mike"}');
@@ -67,26 +67,64 @@ describe('Class', () => {
 		expect(node.getState()).to.equal('{"name":"mike"}');
 	});
 
-	it.skip('should do these things in the future', () => {
+	it('should subscribe to instances', () => {
+
+		const n1 = new Component({ subscribe: '{{id}}.name', id: 'buzz' });
+		const n2 = new Component({ subscribe: '{{id}}.name', id: 'bazz' });
+
 		store.set({
-			'one.name': 'madhu',
-			'two.name': 'madhu'
+			'buzz.name': 'fly',
+			'bazz.name': 'bee'
 		});
 
-		store.on('two.name', (data) => {
-			data += changes;
-			return data;
-		});
+		expect(n1.getState()).to.equal('{"name":"fly"}');
+		expect(n2.getState()).to.equal('{"name":"bee"}');
+	});
 
-		// appends to static Class namespaces
-		// if props.instanceNamespaces
+	it('should get data from an array by id', () => {
+		const data = [
+			{ id:1, name: 'Clark'},
+			{ id:2, name: 'Bruce'},
+			{ id:3, name: 'Diana'},
+		];
 
-		// store.save to localStorage
+		store.set({ data });
 
-		// case types.ARCHIVE_PROJECT:
-		// case types.RESTORE_PROJECT:
+		const n1 = new Component({ subscribe: 'data[id].name', id: 1 });
+		const n2 = new Component({ subscribe: 'data[id].name', id: 2 });
+		const n3 = new Component({ subscribe: 'data[id].name', id: 3 });
 
 
-	})
+		//const n3 = new Component({ subscribe: 'data[id].name', id: 3 });
 
+		// need
+		// store.set('data[id:1].name', 'Superman')
+		// store.set('data[id::1].name', 'Superman')
+		// store.set('data[id=1].name', 'Superman')
+		// store.set('data[1].name', 'Superman') // index - is this ever used?
+		// store.state.data.find(item = item.id === id)
+		// store.set('select from data where id='b', 'Superman')
+		// <- and as object
+		//
+		// CSSPath
+		// store.get('.data #b [name]')
+		// store.get('.data [value="b"] [name]')
+		// convert:
+		// subscribe data[id].name
+	});
+
+// store.set('data[id:1].name', 'Superman')
+// store.set('data[id::1].name', 'Superman')
+// store.set('data[id=1].name', 'Superman')
+
+	// before import store
+	// localStorage.REACT_STATE_STORE_KEY = 'saved_data'
+	// or
+	// store.REACT_STATE_STORE_KEY = 'saved_data';
+	// store.save to localStorage
+
+	// store.on
+
+	// case types.ARCHIVE_PROJECT:
+	// case types.RESTORE_PROJECT:
 });

@@ -14,10 +14,12 @@ global state without all of the boilerplate.
 RSS differs from the [Flux Architecture](http://facebook.github.io/flux/). Flux dispatches to 
 all registered callbacks, while RSS dispatches only to the relevant callbacks. RSS is essentially 
 a pub/sub pattern. While this loses a few of the features of Flux, such as deterministic call order,
-it makes up for it in simplicity of setup, and a synchronistic system. RSS is essentially immutable, in that the internal state is not exposed to changes.
+it makes up for it in simplicity of setup, and a synchronistic system. RSS is essentially immutable, 
+in that the internal state is not exposed to changes.
 
 Unlike Redux, it maintains a single state tree. There is no rewind of state, or undo, but because 
-of this it is faster and uses much less memory.
+of this it is faster and uses much less memory. Also unlike Redux, you can connect _instances_ to 
+state, not just classes.
 
 ## Usage
 
@@ -89,7 +91,25 @@ store.set({
 
 ### Instance Subscriptions
 
+Sometimes there is a need for a more specific state binding to an _instance_ instead of a _Class_.
 
+To allow for this, pass in a templatized property as your namespace:
+
+```jsx harmony
+export default connect('{{instanceId}}.one,{{instanceId}}.two', MyComponent);
+```
+
+Then, on component creation, pass in the property you used, in this case, `instanceId`:
+
+```jsx harmony
+<InstanceTest instanceId="aaa" />
+```
+
+This will now be the equivalent of:
+
+```jsx harmony
+subscribe('aaa.one', this);
+```
 
 ### Methods
 

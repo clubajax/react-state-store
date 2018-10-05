@@ -9,7 +9,19 @@ export default class FauxComponent {
 
 		Object.keys(options).forEach((key) => {
 			if (key === 'subscribe') {
-				store.subscribe(options[key], this);
+
+				let subscription = options[key];
+
+				if (/{{/.test(subscription)) {
+					subscription = subscription.replace(/{{\w*}}/g, (word) => {
+						word = word.replace('{{', '').replace('}}', '');
+						return options[word];
+					});
+				}
+
+				store.subscribe(subscription, this);
+
+
 			} else {
 				this[key] = options[key];
 			}

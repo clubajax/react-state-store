@@ -10,4 +10,4 @@ class InstanceTest extends React.Component {
 	}
 }
 
-export default connect('*.name', InstanceTest);
+export default connect('{{namespace}}.name', InstanceTest);

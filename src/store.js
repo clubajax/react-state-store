@@ -22,7 +22,7 @@ const store = {
 	},
 
 	subscribe (namespaces, instance) {
-		// console.log('subscribe', namespaces);
+		console.log('subscribe', namespaces);
 		items.push({
 			instance,
 			namespaces: namespaces.split(',').map(str => str.trim())
@@ -61,7 +61,21 @@ function setState (item, options = {}) {
 
 	const stateForInstance = {};
 	item.namespaces.forEach((ns) => {
-		stateForInstance[key(ns)] = copy(state[ns]);
+		console.log('get:', ns);
+		if (/\[/.test(ns)){
+			let valueItem;
+			const prop = ns.split('[')[0];
+			const id = ns.substring(ns.indexOf('[') + 1, ns.length - 1);
+			const data = state[prop];
+			if (id === 'index') {
+				valueItem = data[id];
+			} else {
+				valueItem = data.find(m => m[id] === item.instance[id]);
+			}
+			stateForInstance[key(ns)] = copy(valueItem);
+		} else {
+			stateForInstance[key(ns)] = copy(state[ns]);
+		}
 	});
 
 	if (typeof item.instance === 'function') {

@@ -10,8 +10,11 @@ export default function connect (namespaces, Component) {
 			this[STATE] = CREATED;
 
 			let subscription = namespaces;
-			if (props.namespace) {
-				subscription = namespaces.replace(/\*/g, props.namespace);
+			if (/{{/.test(namespaces)) {
+				subscription = namespaces.replace(/{{\w*}}/g, (word) => {
+					word = word.replace('{{', '').replace('}}', '');
+					return props[word];
+				});
 			}
 
 			store.subscribe(subscription, this);
@@ -27,7 +30,7 @@ export default function connect (namespaces, Component) {
 		}
 
 		render () {
-			return React.createElement(Component, {...this.state, ...this.props});
+			return React.createElement(Component,  Object.assign(this.state, this.props));
 		}
 	}
 	return StateHOC;
