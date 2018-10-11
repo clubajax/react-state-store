@@ -7,7 +7,7 @@ global state without all of the boilerplate.
 
 	yarn add @clubajax/react-state-store
 
-	npm install @clubajax/react-state-store
+	npm install @clubajax/react-state-store --save
 
 ## Description
 
@@ -30,16 +30,16 @@ the listeners:
 import {connect} from 'react-state-store';
 
 class Item extends React.Component {
-	render () {
-		return (
-			<div>
-				{this.props.name && <Display />}
-			</div>
-		);
-	}
+  render () {
+    return (
+      <div>
+        {this.props.name && <Display />}
+      </div>
+    );
+  }
 }
 
-export default connect('name', List);
+export default connect('name', Item);
 ```
 The second argument of `connect` is a React component. The first argument, in this case, is
 the key for which to subscribe. When `name` changes in the store, the `Item.props` object 
@@ -50,7 +50,7 @@ There can be multiple subscriptions, separated by commas.
 A subscription has two aspects, before and after the period-delimiter: an optional namespace, 
 and the key that will be pushed to the `props` object.
 
-    [namespace].[key]
+	[namespace].[key]
 
 Example:
 
@@ -58,14 +58,14 @@ Example:
 import {connect} from 'react-state-store';
 
 class List extends React.Component {
-	render () {
-		return (
-			<div>
-				{this.props.one && <DisplayOne />}
-				{this.props.two && <DisplayTwo />}
-			</div>
-		);
-	}
+  render () {
+    return (
+      <div>
+        {this.props.one && <DisplayOne />}
+        {this.props.two && <DisplayTwo />}
+      </div>
+    );
+  }
 }
 
 export default connect('subscription.one,subscription.two', List);
@@ -84,8 +84,8 @@ Multiple properties may be set at once by passing an object:
 
 ```jsx harmony
 store.set({
-	'subscription.one': 'Display One Name',
-	'subscription.two': 'Display Two Name'
+  'subscription.one': 'Display One Name',
+  'subscription.two': 'Display Two Name'
 });
 ```
 
@@ -156,8 +156,8 @@ Clears the store's state and subscriptions. Primarily used for testing.
 RSS defaults to a dot (.) as a delimiter between the namespace and the key. This can be set to
 something else if prefered:
 
-    store.delimiter = '::';
-    store.set('namespace::name', 'my-value');
+	store.delimiter = '::';
+	store.set('namespace::name', 'my-value');
 
 ## License
 
