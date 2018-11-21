@@ -29,6 +29,11 @@ describe('Class', () => {
 		expect(two.getState()).to.equal('{"name":"Two"}');
 	});
 
+    it('emits an event', () => {
+		const widget = new Component({ subscribe: 'clear' });
+
+    });
+    
 	it('it will not call setState if no change', () => {
 
 		let stateCalled = 0;

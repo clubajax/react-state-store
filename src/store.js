@@ -3,7 +3,7 @@ import { STATE, CREATED, MOUNTED } from './constants';
 const store = {
 	delimiter: '.',
 
-	set (namespace, value) {
+	set (namespace, value, isEmitter) {
 		if (typeof namespace === 'object') {
 			Object.assign(state, namespace);
 		} else {
@@ -12,10 +12,14 @@ const store = {
 
 		items.forEach((item, i) => {
 			if (includes(item, namespace)) {
-				setState(item, { namespace });
+				setState(item, { namespace, isEmitter });
 			}
 		});
 	},
+
+    emit (namespace, value = true) {
+        this.set(namespace, value, true)
+    },
 
 	get (name) {
 		return copy(name ? state[name] : state);
@@ -55,7 +59,7 @@ function setState (item, options = {}) {
 
 	const namespace = options.namespace;
 
-	if (item.instance.state && noChanges(item, namespace)) {
+	if (item.instance.state && !options.isEmitter && noChanges(item, namespace)) {
 		return;
 	}
 
